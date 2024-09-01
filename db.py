@@ -224,7 +224,79 @@ def get_career_details(careerid):
 #mentor
 
 def update_mentor(json_data):
-    pass
+    event_name = json_data['event_name']
+    event_link = json_data['event_link']
+    event_img = json_data['event_img']
+    event_description = json_data['event_description']
+    mentor_image = json_data['mentor_image']
+    mentor_name = json_data['mentor_name']
+    mentor_designation = json_data['mentor_designation']
+    mentor_linkedin = json_data['mentor_linkedin']
+    time = json_data['time']
+
+    query = """
+            INSERT INTO mentor 
+            (event_name, event_link, event_img, event_description, mentor_image, mentor_name, mentor_designation, mentor_linkedin, time)
+            VALUES
+            (%s,%s,%s,%s,%s,%s,%s,%s,%s);
+            """
+    query_data = (event_name, event_link, event_img, event_description, mentor_image, mentor_name, mentor_designation, mentor_linkedin, time, )
+    cur.execute(query, query_data)
+    cnx.commit()
+
+    return {"status": "success"}
+
+def list_mentors():
+
+    query = """
+            SELECT *
+            FROM mentor;
+    """
+    cur.execute(query)
+    datas = cur.fetchall()
+    json_data = {"results": []}
+    for data in datas:
+        ment = {
+            "event_name": data[0],
+            "event_link": data[1],
+            "event_img": data[2],
+            "event_description": data[3],
+            "mentor_image": data[4],
+            "mentor_name": data[5],
+            "mentor_designation": data[6],
+            "mentor_linkedin": data[7],
+            "id": "/mentor/" + str(data[8]),
+            "time": str(data[9])
+        }
+        json_data['results'].append(ment)
+    return json_data
+def get_mentor(id):
+
+    query = """
+            SELECT *
+            FROM mentor
+            WHERE id = %s ;
+    """
+    query_data = (id, )
+
+    cur.execute(query, query_data)
+    data = cur.fetchone()
+    ment = {
+        "event_name": data[0],
+        "event_link": data[1],
+        "event_img": data[2],
+        "event_description": data[3],
+        "mentor_image": data[4],
+        "mentor_name": data[5],
+        "mentor_designation": data[6],
+        "mentor_linkedin": data[7],
+        "id": "/mentor/" + str(data[8]),
+        "time": str(data[9]) 
+    }
+
+    return ment
+
+
 
 ###############################################################################
 if __name__ == "__main__":

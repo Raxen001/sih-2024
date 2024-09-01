@@ -67,18 +67,21 @@ def get_career(careerid):
 @cross_origin()
 def update_mentor():
     data = request.json
+    result = db.update_mentor(data)
     pprint(data)
-    return {}
+    return result
 
-@app.route("/listmentor")
+@app.route("/listmentors")
 @cross_origin()
 def listmentors():
-    return {}
+    json_data = db.list_mentors()
+    return json_data
 
 @app.route("/mentor/<mentorid>")
 @cross_origin()
 def get_mentor(mentorid):
-    return {}
+    json_data = db.get_mentor(mentorid)
+    return json_data
 
 
 
