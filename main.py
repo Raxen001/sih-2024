@@ -55,6 +55,26 @@ def list_of_careers():
     json_data = db.get_careers(offset=offset)
     return json_data
 
+@app.route("/career/<careerid>")
+@cross_origin()
+def get_career(careerid):
+    json_data = db.get_career_details(careerid)
+    return json_data
+################################################################################
+# mentors
+@app.route("/updatementor")
+@cross_origin()
+def update_mentor():
+    data = request.json
+    return {}
+
+@app.route("/listmentor")
+@cross_origin()
+def listmentors():
+    data = request.json
+    return {}
+
+
 ################################################################################
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
