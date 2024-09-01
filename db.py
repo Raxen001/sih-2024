@@ -70,7 +70,7 @@ def get_course_details(courseid):
     
     for data  in datas:
         college = {
-            "college_name": data[0],
+            "college_name": data[11],
             "college_code": data[1],
             "college_image": data[2],
             "college_nrif": data[3],

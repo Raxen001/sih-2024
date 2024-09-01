@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import json
 import db
+from pprint import pprint
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -66,13 +67,19 @@ def get_career(careerid):
 @cross_origin()
 def update_mentor():
     data = request.json
+    pprint(data)
     return {}
 
 @app.route("/listmentor")
 @cross_origin()
 def listmentors():
-    data = request.json
     return {}
+
+@app.route("/mentor/<mentorid>")
+@cross_origin()
+def get_mentor(mentorid):
+    return {}
+
 
 
 ################################################################################
